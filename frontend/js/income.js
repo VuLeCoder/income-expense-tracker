@@ -50,6 +50,7 @@ async function renderData() {
   // Sau khi load xong, render ra bảng
   incomes.forEach((income) => {
     const data = {
+      id: income.id,
       date: formatDate(income.date),
       description: income.description,
       amount: income.amount,
@@ -60,6 +61,7 @@ async function renderData() {
 
   expenses.forEach((expense) => {
     const data = {
+      id: expense.id,
       date: formatDate(expense.date),
       description: expense.description,
       amount: expense.amount,
@@ -124,7 +126,19 @@ async function submitTransaction(e, type) {
     const response = await res.json();
     console.log(`[${type.toUpperCase()}] Đã lưu vào DB:`, response);
 
-    createRow(document.querySelector(`#${type}-table tbody`), data, type);
+    let savedData;
+    if(type === "income") {
+      savedData = response.data.income;
+    } else {
+      savedData = response.data.expense;
+    }
+    console.log(savedData);
+
+    createRow(
+      document.querySelector(`#${type}-table tbody`),
+      savedData,
+      type
+    );
     updateTotals();
     form.reset();
   } catch (error) {

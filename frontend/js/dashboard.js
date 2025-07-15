@@ -27,43 +27,78 @@ function createRow(tableBody, data, type) {
     </td>
   `;
 
-  if(type === "income") {
+  if (type === "income") {
     totalIncome += data.amount;
   } else {
     totalExpense += data.amount;
   }
 
-  row.querySelector(".delete-btn").onclick = () => {
+  row.querySelector(".delete-btn").onclick = async () => {
     if (confirm("Bạn chắc chắn muốn xóa?")) {
-      if (type === "income") totalIncome -= data.amount;
-      else totalExpense -= data.amount;
-      row.remove();
-      updateTotals();
+      try {
+        const res = await fetch(`${API_BASE_URL}/${type}/${data.id}`, {
+          method: "DELETE",
+          headers: getHeaders(),
+        });
+
+        if (!res.ok) throw new Error("Xóa thất bại");
+
+        if (type === "income") totalIncome -= data.amount;
+        else totalExpense -= data.amount;
+
+        row.remove();
+        updateTotals();
+      } catch (error) {
+        console.error("Lỗi khi xóa:", error);
+        alert("Xóa thất bại!");
+      }
     }
   };
 
-  row.querySelector(".edit-btn").onclick = () => {
+  row.querySelector(".edit-btn").onclick = async () => {
     const newDate = prompt("Date:", data.date) || data.date;
-    const newDesc = prompt("Description:", data.description) || data.description;
+    const newDesc =
+      prompt("Description:", data.description) || data.description;
     const newAmount = parseInt(prompt("Amount:", data.amount) || data.amount);
 
     if (!isNaN(newAmount)) {
-      if (type === "income") {
-        totalIncome -= data.amount;
-        totalIncome += newAmount;
-      } else {
-        totalExpense -= data.amount;
-        totalExpense += newAmount;
+      try {
+        const updatedData = {
+          date: newDate,
+          description: newDesc,
+          amount: newAmount,
+        };
+
+        const res = await fetch(`${API_BASE_URL}/${type}/${data.id}`, {
+          method: "PUT",
+          headers: getHeaders(),
+          body: JSON.stringify(updatedData),
+        });
+
+        if (!res.ok) throw new Error("Sửa thất bại");
+
+        // Cập nhật lại tổng
+        if (type === "income") {
+          totalIncome -= data.amount;
+          totalIncome += newAmount;
+        } else {
+          totalExpense -= data.amount;
+          totalExpense += newAmount;
+        }
+
+        // Cập nhật data và UI
+        data.date = newDate;
+        data.description = newDesc;
+        data.amount = newAmount;
+
+        row.children[0].textContent = newDate;
+        row.children[1].textContent = newDesc;
+        row.children[2].textContent = formatCurrency(newAmount);
+        updateTotals();
+      } catch (error) {
+        console.error("Lỗi khi sửa:", error);
+        alert("Sửa thất bại!");
       }
-
-      data.date = newDate;
-      data.description = newDesc;
-      data.amount = newAmount;
-
-      row.children[0].textContent = newDate;
-      row.children[1].textContent = newDesc;
-      row.children[2].textContent = formatCurrency(newAmount);
-      updateTotals();
     }
   };
 
