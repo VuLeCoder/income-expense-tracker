@@ -9,10 +9,10 @@ CREATE TABLE users (
 
 CREATE TABLE incomes (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
-    description TEXT,
+    description TEXT NOT NULL,
     amount INT NOT NULL,
     user_id INT NOT NULL,
+    date date NOT NULL,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_user
@@ -23,10 +23,10 @@ CREATE TABLE incomes (
 
 CREATE TABLE expenses (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
-    description TEXT,
+    description TEXT NOT NULL,
     amount INT NOT NULL,
     user_id INT NOT NULL,
+    date date NOT NULL,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_user
