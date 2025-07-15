@@ -1,0 +1,178 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* Layout chính */
+.container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ========== ASIDE ========== */
+.sidebar {
+  width: 260px;
+  background: #1f2937;
+  color: #fff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.totals {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.totals span {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+/* ========== MAIN ========== */
+.main {
+  flex: 1;
+  padding: 30px 40px;
+  background: #ffffff;
+  overflow-y: auto;
+}
+
+/* NAVBAR (tab) */
+.navbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.navbar .tab {
+  padding: 10px 24px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.navbar .tab:hover {
+  background-color: #d1d5db;
+}
+
+.navbar .tab.active {
+  background-color: #1f2937;
+  color: #fff;
+}
+
+/* Tab content */
+.tab-section {
+  display: none;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+/* Form nhập */
+.form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.form button {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+  max-height: 300px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f9fafb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 4px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.edit-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+}

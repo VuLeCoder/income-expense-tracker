@@ -20,11 +20,15 @@ async function login() {
     const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({username, password}),
     });
 
     if (response.ok) {
       alert("Đăng nhập thành công");
+
+      const base64Auth = btoa(`${username}:${password}`);
+      localStorage.setItem("authHeader", `Basic ${base64Auth}`);
+
       window.location.href = "dashboard.html";
     } else {
       const result = await response.json();

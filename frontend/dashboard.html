@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý Thu Chi</title>
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img src="https://via.placeholder.com/100" class="avatar" alt="Avatar" />
+      <div class="user-info">
+        <h3 id="username"></h3>
+        <p id="fullname"></p>
+      </div>
+      <div class="totals">
+        <p><strong>Total income:</strong> <span id="total-income">0₫</span></p>
+        <p><strong>total expense:</strong> <span id="total-expense">0₫</span></p>
+        <p><strong>Balance:</strong> <span id="balance">0₫</span></p>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="navbar">
+        <button class="tab active" data-target="income">Income</button>
+        <button class="tab" data-target="expense">Expense</button>
+      </nav>
+
+      <!-- INCOME -->
+      <div id="income-section" class="tab-section active">
+        <form id="income-form" class="form">
+          <input type="date" name="date" required />
+          <input type="text" name="description" placeholder="Descriptions" required />
+          <input type="number" name="amount" placeholder="Amount" required />
+          <button type="submit">Add income</button>
+        </form>
+        <div class="table-container">
+          <table class="table" id="income-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Descriptions</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EXPENSE -->
+      <div id="expense-section" class="tab-section">
+        <form id="expense-form" class="form">
+          <input type="date" name="date" required />
+          <input type="text" name="description" placeholder="Descriptions" required />
+          <input type="number" name="amount" placeholder="Amount" required />
+          <button type="submit">Add expense</button>
+        </form>
+        <div class="table-container">
+          <table class="table" id="expense-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Descriptions</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/dashboard.js"></script>
+  <!-- <script src="./js/expense.js"></script> -->
+  <script src="./js/income.js"></script>
+</body>
+</html>
